@@ -1,4 +1,4 @@
-live at: nilpeep-stock-app.netlify.app
+live at: www.nilpeep-stock-app.netlify.app
 
 
 
