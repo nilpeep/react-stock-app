@@ -1,3 +1,9 @@
+live at: nilpeep-stock-app.netlify.app
+
+
+
+
+
 ## `Kurulum`
 
 ```
