@@ -21,7 +21,7 @@ export const useLoginService = () => {
             const {data} = await axios.post(`${BASE_URL}/auth/login/`, userInfo)
             dispatch(loginSuccess(data))
             navigate('/stock')
-            toastSuccessNotify('Succes')
+            toastSuccessNotify('You have logged in successfully!')
         } catch (error) {
             dispatch(fetchFail())
             console.log(error)
@@ -37,7 +37,7 @@ export const useLoginService = () => {
 
             dispatch(registerSuccess(data))
             navigate('/stock')
-            toastSuccessNotify('register Succes')
+            toastSuccessNotify('You have registered successfully!')
 
             
         
@@ -52,6 +52,7 @@ export const useLoginService = () => {
         try {
             await axios.get(`${BASE_URL}/auth/logout`)
             dispatch(logOut())
+            toastSuccessNotify('you have logged out')
         } catch (error) {
             console.log(error)
         }
