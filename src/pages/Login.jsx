@@ -17,19 +17,11 @@ const Login = () => {
 
   const loginSchema = object({
     email: string()
-      .email("Lütfen geçerli bir email giriniz")
-      .required("Email girişi zorunludur"),
+      .email("please enter a valid email")
+      .required("email required"),
     password: string()
-      .required("Şifre zorunludur.")
-      .min(8, "Şifre en az 8 karakter içermelidir")
-      .max(16, "Şifre en falza 16 karakter içermelidir")
-      .matches(/\d+/, "Şifre en az bir rakam içermelidir")
-      .matches(/[a-z]/, "Şifre en az bir küçük harf içermelidir")
-      .matches(/[A-Z]/, "Şifre en az bir büyük harf içermelidir")
-      .matches(
-        /[@$!%*?&]+/,
-        "Şifre en az bir özel karakter (@$!%*?&) içermelidir"
-      ),
+      .required("password required")
+      
   })
   return (
     <Container maxWidth="lg">

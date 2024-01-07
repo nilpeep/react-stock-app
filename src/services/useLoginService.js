@@ -25,7 +25,7 @@ export const useLoginService = () => {
         } catch (error) {
             dispatch(fetchFail())
             console.log(error)
-            toastErrorNotify('error')
+            toastErrorNotify('invalid email or password')
         }
     }
 
