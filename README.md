@@ -1,3 +1,9 @@
+[Click me to open live link of this project](https://nilpeep-stock-app.netlify.app)
+
+
+
+
+
 ## `Kurulum`
 
 ```
