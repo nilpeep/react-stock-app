@@ -5,3 +5,5 @@ export const stockSlice = () => {
     <div>stockSlice test</div>
   )
 }
+
+

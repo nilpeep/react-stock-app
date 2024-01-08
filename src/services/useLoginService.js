@@ -1,24 +1,30 @@
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import {toastSuccessNotify , toastErrorNotify} from '../helper/ToastNotify'
-import { fetchStart, fetchFail,loginSuccess,registerSuccess,logOut } from '../features/authSlice'
+import { fetchStart, fetchFail,loginSuccess,registerSuccess,logOutSuccess } from '../features/authSlice'
+import useAxios from './useAxios'
 
 
 
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 export const useLoginService = () => {
     const BASE_URL = process.env.REACT_APP_BASE_URL
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const {token} = useSelector((state) => state.auth)
+
+    const { axiosWithToken, axiosPublic } = useAxios()
+
     const login = async (userInfo) =>{
 
 
         dispatch(fetchStart())
         
         try {
-            const {data} = await axios.post(`${BASE_URL}/auth/login/`, userInfo)
+            const {data} = await axiosPublic.post(`/auth/login/`, userInfo)
             dispatch(loginSuccess(data))
             navigate('/stock')
             toastSuccessNotify('You have logged in successfully!')
@@ -50,9 +56,16 @@ export const useLoginService = () => {
 
     const logout = async () =>{
         try {
-            await axios.get(`${BASE_URL}/auth/logout`)
-            dispatch(logOut())
+            // const {data}  =await axios.get(`${BASE_URL}/auth/logout`, {
+            //     headers:{Authorization: `Token ${token}`}
+            // })
+
+            await axiosWithToken("/auth/logout")
+
+            dispatch(logOutSuccess())
             toastSuccessNotify('you have logged out')
+
+
         } catch (error) {
             console.log(error)
         }
