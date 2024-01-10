@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -61,13 +61,14 @@ const icons = [
   ]
 
 export const MenuListItems = () => {
+  const [hovered, setHovered] = useState(null)
     const navigate = useNavigate()
   return (
     <List>
         {icons.map((item, index) => (
-          <ListItem key={index} disablePadding onClick={() => navigate(item.url)}>
-            <ListItemButton>
-              <ListItemIcon>
+          <ListItem  onMouseEnter={() => setHovered(index)} onMouseLeave={() => setHovered(null)} key={index} disablePadding onClick={() => navigate(item.url)}>
+            <ListItemButton style={{color: hovered === index ? 'red': 'white'}}>
+              <ListItemIcon style={{color: hovered === index ? 'red': 'white'}}>
                 {item.icon}
               </ListItemIcon>
               <ListItemText primary={item.title} />
