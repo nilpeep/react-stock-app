@@ -8,6 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import CreateFirmModal from "../components/CreateFirmModal"
 
 
 export const Firms = () => {
@@ -19,7 +20,8 @@ export const Firms = () => {
         getFirms()
         console.log(firms)
     },[])
-  return (
+  return (<>
+  <CreateFirmModal/>
     <div
     style={{
       display: "flex",
@@ -50,5 +52,6 @@ export const Firms = () => {
       </Card>
     ))}
   </div>
+  </>
   )
 }

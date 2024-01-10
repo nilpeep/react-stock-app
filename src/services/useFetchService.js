@@ -17,5 +17,7 @@ export const useFetchService = () => {
             console.log(error)
         }
     }
+
+    
   return {getFirms}
 }

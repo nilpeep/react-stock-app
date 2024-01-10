@@ -5,7 +5,7 @@ const initialState = {
   products: [],
   purchases: [],
   brands: [],
-  firms: [],
+ 
 }
 
 const stockSlice = createSlice({

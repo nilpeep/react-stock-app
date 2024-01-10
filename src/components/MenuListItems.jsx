@@ -1,24 +1,9 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import { Button } from '@mui/material';
-import { useSelector } from 'react-redux';
-import { useLoginService } from '../services/useLoginService';
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard"
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney"
 import InventoryIcon from "@mui/icons-material/Inventory"
@@ -66,9 +51,17 @@ export const MenuListItems = () => {
   return (
     <List>
         {icons.map((item, index) => (
-          <ListItem  onMouseEnter={() => setHovered(index)} onMouseLeave={() => setHovered(null)} key={index} disablePadding onClick={() => navigate(item.url)}>
-            <ListItemButton style={{color: hovered === index ? 'red': 'white'}}>
-              <ListItemIcon style={{color: hovered === index ? 'red': 'white'}}>
+          <ListItem 
+          sx={{
+            color:'white', 
+            "&:hover":{color:'red'},
+            "&:hover .MuiSvgIcon-root":{color:'red'},
+            "& .MuiSvgIcon-root":{color:'white'}
+          
+          }} 
+          key={index} disablePadding onClick={() => navigate(item.url)}>
+            <ListItemButton >
+              <ListItemIcon sx={{color:'white'}} >
                 {item.icon}
               </ListItemIcon>
               <ListItemText primary={item.title} />
