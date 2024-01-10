@@ -16,6 +16,10 @@ const authSlice = createSlice({
     fetchStart:(state) =>{
       state.loading=true
     },
+    fetchFail:(state)=>{
+      state.loading=false
+      state.error= true
+    },
     loginSuccess:(state, {payload}) =>{
       state.loading=false
       state.user = payload.user.username
@@ -25,10 +29,6 @@ const authSlice = createSlice({
       state.loading=false
       state.user=payload.data.username
       state.token = payload.token
-    },
-    fetchFail:(state)=>{
-      state.loading=false
-      state.error= true
     },
     logOutSuccess:(state)=>{
       state.loading = false

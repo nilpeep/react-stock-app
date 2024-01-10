@@ -10,7 +10,8 @@ import InventoryIcon from "@mui/icons-material/Inventory"
 import StoreIcon from "@mui/icons-material/Store"
 import StarsIcon from "@mui/icons-material/Stars"
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
-import { useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
+
 
 const icons = [
     {
@@ -48,18 +49,28 @@ const icons = [
 export const MenuListItems = () => {
   const [hovered, setHovered] = useState(null)
     const navigate = useNavigate()
+
+    const handleClick = (url,index) =>{
+      navigate(url)
+      setActive(index)
+    }
+
+    const [active, setActive] = useState(null)
   return (
     <List>
         {icons.map((item, index) => (
+   
+
           <ListItem 
           sx={{
-            color:'white', 
+            color:active == index ? 'red' : 'white', 
             "&:hover":{color:'red'},
             "&:hover .MuiSvgIcon-root":{color:'red'},
-            "& .MuiSvgIcon-root":{color:'white'}
-          
+            "& .MuiSvgIcon-root":{color:'white'},
+            
+            
           }} 
-          key={index} disablePadding onClick={() => navigate(item.url)}>
+          key={index} disablePadding onClick={()=>handleClick(item.url,index)}>
             <ListItemButton >
               <ListItemIcon sx={{color:'white'}} >
                 {item.icon}
@@ -67,6 +78,7 @@ export const MenuListItems = () => {
               <ListItemText primary={item.title} />
             </ListItemButton>
           </ListItem>
+          
         ))}
       </List>
   )

@@ -1,26 +1,26 @@
 import React from 'react'
-import { useFetchService } from '../services/useFetchService'
+import { useStockCalls } from '../services/useStockCalls'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CreateFirmModal from "../components/CreateFirmModal"
+import FirmCard from '../components/FirmCard';
+import { Grid } from '@mui/material';
 
 
 export const Firms = () => {
-    const {getFirms} = useFetchService()
+    const {getStocks} = useStockCalls()
 
     const {firms} = useSelector((state) => state.stock)
 
     useEffect(() => {
-        getFirms()
+        getStocks('firms')
         console.log(firms)
     },[])
   return (<>
+  <Typography variant='h4' color='success.main'>
+    Firms
+  </Typography>
   <CreateFirmModal/>
     <div
     style={{
@@ -31,26 +31,22 @@ export const Firms = () => {
       alignItems: "center",
     }}
   >
-    {firms?.map((item, index) => (
-      <Card key={index} sx={{ minWidth:345,  maxWidth: 345 }}>
-        <CardMedia
-          sx={{ height: 100 }}
-          image={item.image}
-          title="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {item.name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Address:{item.address}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">tel : {item.phone}</Button>
-        </CardActions>
-      </Card>
-    ))}
+
+    {/* <Grid container gap={2} mt={3} justifyContent={"center"}>
+    {firms?.map((firm) => {
+      <Grid item key={firm._id}>
+        <FirmCard firm={firm}/>
+      </Grid>
+    })}
+    </Grid> */}
+    <Grid container gap={2} mt={3} justifyContent={"center"}>
+        {firms?.map((firm) => (
+          <Grid item key={firm._id}>
+            <FirmCard firm={firm} />
+          </Grid>
+        ))}
+      </Grid>
+    
   </div>
   </>
   )
