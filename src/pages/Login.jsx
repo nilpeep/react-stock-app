@@ -66,6 +66,7 @@ const Login = () => {
             onSubmit={(values, actions) => {
               //TODO login(post) istegi
               login(values)
+              console.log(values)
               actions.resetForm()
               actions.setSubmitting(false) //? isSubmitting
               //? veriler global state'e aktırlabilir

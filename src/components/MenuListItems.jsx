@@ -75,7 +75,7 @@ export const MenuListItems = () => {
               <ListItemIcon sx={{color:'white'}} >
                 {item.icon}
               </ListItemIcon>
-              <ListItemText primary={item.title} />
+              <ListItemText primary={item.title} /> 
             </ListItemButton>
           </ListItem>
           

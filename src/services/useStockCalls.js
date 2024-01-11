@@ -37,10 +37,24 @@ export const useStockCalls = () => {
         }
     }
 
+    const createFirm = async (url,firmInfo) =>{
+        dispatch(fetchStart())
+        try {
+            await axiosWithToken.post(`${url}`,firmInfo)
+            toastSuccessNotify('firm created')
+            getStocks(url)
+       
+        } catch (error) {
+            dispatch(fetchFail())
+            toastErrorNotify('error')
+            
+        }
+    }
+
    
 
     
 
     
-  return {getStocks,deleteStock}
+  return {getStocks,deleteStock,createFirm}
 }

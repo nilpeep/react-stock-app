@@ -7,6 +7,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { TextField } from '@mui/material';
+import { Form, Formik } from 'formik';
+import { string,number, object } from 'yup';
+import { useStockCalls } from '../services/useStockCalls';
 
 const style = {
   position: 'absolute',
@@ -20,15 +24,28 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
+export default function CreateFirmModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [age, setAge] = React.useState('');
 
-  const handleChange = (e) => {
-    setAge(e.target.value);
-  }
+
+
+
+  const firmSchema = object({
+    name: string()
+      .required("name required"),
+    phone: string()
+      .required("phone required"),
+    address: string()
+      .required("address required"),
+    image: string()
+      .required("image required"),
+      
+  })
+
+  const {createFirm} = useStockCalls()
 
   return (
     <div>
@@ -41,20 +58,69 @@ export default function BasicModal() {
       >
         <Box sx={style}>
         <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Age"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
+          <Formik
+          validationSchema={firmSchema}
+          initialValues={{name: "",
+          phone: "",
+          address: "",
+          image: "", 
+        }} 
+        onSubmit={(values,actions) =>{
+          // createFirm(values) 
+          console.log(values.name)
+          createFirm('firms',values)
+          actions.resetForm()
+          actions.setSubmitting(false) 
+          handleClose()
+          
+        }}
+      
+          >
+            {({handleBlur,errors,touched,handleChange, values}) =>(
+            <Form>
+      <Box sx={{display:'flex', gap:'1rem',flexDirection:'column'}} fullWidth>
+      <TextField   label="Firm Name*" variant="outlined"
+                    name="name"
+                    id="name"
+                    type="text"
+                    onBlur={handleBlur}
+                    error={touched.name && Boolean(errors.name)}
+                    helperText={errors.name}
+                    value={values.name}
+                    onChange={handleChange}/>
+      <TextField  name="phone"
+                    id="phone"
+                    type="number"
+                    onBlur={handleBlur}
+                    error={touched.phone && Boolean(errors.phone)}
+                    helperText={errors.phone}
+                    value={values.phone}
+                    onChange={handleChange} label="Phone*" variant="outlined" />
+      <TextField label="Address*" variant="outlined"  name="address"
+                    id="address"
+                    type="text"
+                    onBlur={handleBlur}
+                    error={touched.address && Boolean(errors.address)}
+                    helperText={errors.address}
+                    value={values.address}
+                    onChange={handleChange}/>
+      <TextField id="image" label="Image*" variant="outlined" 
+                    type="text"
+                   name='image'
+                   onBlur={handleBlur}
+                   error={touched.image && Boolean(errors.image)}
+                   helperText={errors.image}
+                    value={values.image}
+                    onChange={handleChange}/>
+      <Button type='submit' variant="contained" >
+        Save
+      </Button>
+      </Box>
+
+              </Form>)
+            }
+
+      </Formik>
     </Box>
         </Box>
       </Modal>
