@@ -51,10 +51,22 @@ export const useStockCalls = () => {
         }
     }
 
+    const uploadFirm = async (url,id,firmInfo) =>{
+        dispatch(fetchStart())
+        try {
+            await axiosWithToken.put(`${url}/${id}`,firmInfo)
+            toastSuccessNotify('firm uploaded successfully')
+            getStocks(url)
+        } catch (error) {
+            toastErrorNotify('firm update failed')
+            dispatch(fetchFail())
+        }
+    }
+
    
 
     
 
     
-  return {getStocks,deleteStock,createFirm}
+  return {getStocks,deleteStock,createFirm,uploadFirm}
 }

@@ -8,11 +8,12 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
 import EditIcon from "@mui/icons-material/Edit"
 import { btnStyle } from "../styles/globalStyles"
 import { useStockCalls } from "../services/useStockCalls"
+import UploadFirmModal from "./UploadFirmModal"
 
 
 export default function FirmCard({ firm }) {
   const { address, image, name, phone, _id } = firm
-  const {deleteStock} = useStockCalls()
+  const {deleteStock,uploadFirm} = useStockCalls()
   return (
     <Card
       sx={{
@@ -48,7 +49,8 @@ export default function FirmCard({ firm }) {
 
       <CardActions>
         <DeleteOutlineIcon onClick={() => deleteStock('firms', _id)} sx={btnStyle} />
-        <EditIcon sx={btnStyle} />
+        {/* <EditIcon   sx={btnStyle} /> */}
+        <UploadFirmModal id={_id} />
       </CardActions>
     </Card>
   )
