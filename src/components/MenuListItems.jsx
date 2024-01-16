@@ -66,13 +66,13 @@ export const MenuListItems = () => {
             color:active == index ? 'red' : 'white', 
             "&:hover":{color:'red'},
             "&:hover .MuiSvgIcon-root":{color:'red'},
-            "& .MuiSvgIcon-root":{color:'white'},
+            "& .MuiSvgIcon-root":{color:active == index ? 'red' : 'white'},
             
             
           }} 
           key={index} disablePadding onClick={()=>handleClick(item.url,index)}>
             <ListItemButton >
-              <ListItemIcon sx={{color:'white'}} >
+              <ListItemIcon >
                 {item.icon}
               </ListItemIcon>
               <ListItemText primary={item.title} /> 

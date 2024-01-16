@@ -1,53 +1,63 @@
-import React from 'react'
-import { useStockCalls } from '../services/useStockCalls'
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import Typography from "@mui/material/Typography";
-import CreateFirmModal from "../components/CreateFirmModal"
-import FirmCard from '../components/FirmCard';
-import { Grid } from '@mui/material';
-
+import Button from "@mui/material/Button"
+import Typography from "@mui/material/Typography"
+import { useEffect, useState } from "react"
+import {useStockCalls} from "../services/useStockCalls"
+import { useSelector } from "react-redux"
+import { Grid } from "@mui/material"
+import FirmCard from "../components/FirmCard"
+import FirmModal from "../components/FirmModal"
 
 export const Firms = () => {
-    const {getStocks} = useStockCalls()
+  // const { getFirms, getSales } = useStockCalls()
+  const { getStocks } = useStockCalls()
+  const { firms } = useSelector((state) => state.stock)
 
-    const {firms} = useSelector((state) => state.stock)
+  const [info, setInfo] = useState({
+    name: "",
+    phone: "",
+    address: "",
+    image: "",
+  })
 
-    useEffect(() => {
-        getStocks('firms')
-        console.log(firms)
-    },[])
-  return (<>
-  <Typography variant='h4' color='success.main'>
-    Firms
-  </Typography>
-  <CreateFirmModal/>
-    <div
-    style={{
-      display: "flex",
-      flexWrap: "wrap",
-      gap: "1rem",
-      justifyContent: "center",
-      alignItems: "center",
-    }}
-  >
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => {
+    setOpen(false)
+    setInfo({ name: "", phone: "", address: "", image: "" })
+  }
 
-    {/* <Grid container gap={2} mt={3} justifyContent={"center"}>
-    {firms?.map((firm) => {
-      <Grid item key={firm._id}>
-        <FirmCard firm={firm}/>
-      </Grid>
-    })}
-    </Grid> */}
-    <Grid container gap={2} mt={3} justifyContent={"center"}>
+  useEffect(() => {
+    // getFirms()
+    getStocks("firms")
+  }, [])
+
+  console.log(firms)
+
+  return (
+    <div>
+      <Typography variant="h4" color="error" mb={3}>
+        Firms
+      </Typography>
+      <Button variant="contained" onClick={handleOpen}>
+        New Firm
+      </Button>
+
+      <FirmModal
+        open={open}
+        handleClose={handleClose}
+        info={info}
+        setInfo={setInfo}
+      />
+
+      <Grid container gap={2} mt={3} justifyContent={"center"}>
         {firms?.map((firm) => (
           <Grid item key={firm._id}>
-            <FirmCard firm={firm} />
+            <FirmCard setInfo={setInfo} handleOpen={handleOpen} firm={firm} />
           </Grid>
         ))}
       </Grid>
-    
-  </div>
-  </>
+    </div>
   )
 }
+
+

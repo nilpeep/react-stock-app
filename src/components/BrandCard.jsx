@@ -10,10 +10,10 @@ import { btnStyle } from "../styles/globalStyles"
 import { useStockCalls } from "../services/useStockCalls"
 import UploadFirmModal from "./UploadFirmModal"
 
-export default function FirmCard({ setInfo, firm,handleOpen }) {
+
+export default function FirmCard({ firm }) {
   const { address, image, name, phone, _id } = firm
   const {deleteStock,uploadFirm} = useStockCalls()
-  
   return (
     <Card
       sx={{
@@ -31,9 +31,6 @@ export default function FirmCard({ setInfo, firm,handleOpen }) {
         <Typography gutterBottom variant="h5" component="div">
           {name}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {address}
-        </Typography>
       </CardContent>
       <CardMedia
         component="img"
@@ -43,21 +40,10 @@ export default function FirmCard({ setInfo, firm,handleOpen }) {
         sx={{ objectFit: "contain" }}
       />
 
-      <Typography variant="body2" color="text.secondary">
-        {phone}
-      </Typography>
-
       <CardActions>
         <DeleteOutlineIcon onClick={() => deleteStock('firms', _id)} sx={btnStyle} />
-        <EditIcon firm={firm.name} sx={btnStyle}
-        onClick={
-          ()=>{
-            handleOpen()
-            setInfo(firm)
-          }
-        }
-        />
-        
+        {/* <EditIcon   sx={btnStyle} /> */}
+        <UploadFirmModal id={_id} />
       </CardActions>
     </Card>
   )
