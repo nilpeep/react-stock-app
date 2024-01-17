@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { TextField } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -41,19 +42,12 @@ export default function BasicModal() {
       >
         <Box sx={style}>
         <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Age"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
+      <FormControl  fullWidth>
+        
+        <TextField margin='10px' id="outlined-basic" label="Name" variant="outlined" />
+        <TextField id="outlined-basic" label="Address" variant="outlined" />
+        <TextField id="outlined-basic" type='tel' label="Phone" variant="outlined" />
+        <TextField id="outlined-basic" type='url' label="Image" variant="outlined" />
       </FormControl>
     </Box>
         </Box>
