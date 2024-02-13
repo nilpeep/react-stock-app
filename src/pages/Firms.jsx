@@ -3,7 +3,7 @@ import { useStockCalls } from '../services/useStockCalls'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Typography from "@mui/material/Typography";
-import CreateFirmModal from "../components/CreateFirmModal"
+import CreateFirmModal from "../components/FirmModal"
 import FirmCard from '../components/FirmCard';
 import { Button, Grid } from '@mui/material';
 import { btnStyle } from '../styles/globalStyles';
@@ -47,18 +47,10 @@ export const Firms = () => {
       alignItems: "center",
     }}
   >
-
-    {/* <Grid container gap={2} mt={3} justifyContent={"center"}>
-    {firms?.map((firm) => {
-      <Grid item key={firm._id}>
-        <FirmCard firm={firm}/>
-      </Grid>
-    })}
-    </Grid> */}
     <Grid container gap={2} mt={3} justifyContent={"center"}>
         {firms?.map((firm) => (
           <Grid item key={firm._id}>
-            <FirmCard firm={firm} />
+            <FirmCard setInfo={setInfo} handleOpen={handleOpen} firm={firm} />
           </Grid>
         ))}
       </Grid>

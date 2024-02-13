@@ -9,6 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { TextField } from '@mui/material';
 import { modalStyle } from '../styles/globalStyles';
+import { useStockCalls } from '../services/useStockCalls';
 
 const style = {
   position: 'absolute',
@@ -24,7 +25,9 @@ const style = {
 
 export default function BasicModal({open, handleClose,setInfo,info}) {
 
-  
+  const {postStock} = useStockCalls()
+
+  const {putStock} = useStockCalls()
   
 
   const handleChange = (e) => {
@@ -34,6 +37,14 @@ export default function BasicModal({open, handleClose,setInfo,info}) {
   const handleSubmit = (e) =>{
     e.preventDefault()
     //? post
+
+    if(info._id){
+      putStock('firms', info)
+    }else{
+      postStock('firms',info)
+
+    }
+
 
     handleClose()
   }

@@ -66,7 +66,7 @@ export const MenuListItems = () => {
             color:active == index ? 'red' : 'white', 
             "&:hover":{color:'red'},
             "&:hover .MuiSvgIcon-root":{color:'red'},
-            "& .MuiSvgIcon-root":{color:'white'},
+            "& .MuiSvgIcon-root":{color:active==index ? 'red' : 'white'},
             
             
           }} 

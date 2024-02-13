@@ -10,7 +10,7 @@ import { btnStyle } from "../styles/globalStyles"
 import { useStockCalls } from "../services/useStockCalls"
 
 
-export default function FirmCard({ firm }) {
+export default function FirmCard({ firm, handleOpen,setInfo }) {
   const { address, image, name, phone, _id } = firm
   const {deleteStock} = useStockCalls()
   return (
@@ -48,7 +48,10 @@ export default function FirmCard({ firm }) {
 
       <CardActions>
         <DeleteOutlineIcon onClick={() => deleteStock('firms', _id)} sx={btnStyle} />
-        <EditIcon sx={btnStyle} />
+        <EditIcon onClick={()=>{
+          handleOpen()
+          setInfo(firm)
+        }} sx={btnStyle} />
       </CardActions>
     </Card>
   )
